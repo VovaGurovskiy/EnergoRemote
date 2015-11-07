@@ -8,9 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="css/StyleRud.css">
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
@@ -64,8 +67,21 @@
 			<div class="internal"></div>
 		</div>
 			<div class="menu" id="r1m1">
+				<div class="price-slider">
+		            <h4 class="great">Amount</h4>
+		            <span>Minimum $10 is required</span>
+		            <div class="col-sm-12">
+		              <div id="slider"></div>
+		            </div>
+         		 </div>
+				<form action="setdata.php" method="get" id="sendData">
 				<ul class="menuul">
 					<li>On/Off</li>
+					<input type="hidden" name="log" value="test">
+					<input type="hidden" name="pass" value="test">
+					<input type="hidden" name="id_group" value="1">
+					<input type="hidden" name="typedata" value="bright_white">
+					<input type="hidden" id ="amount" name="data" value="">
 					<li>Slider</li>
 					<li>Auto</li>
 					<li><span class="r">R</span><span  class="g">G</span><span   class="b">B</span></li>
@@ -73,6 +89,7 @@
 					<li>Party</li>
 					<li>Simulations</li>
 				</ul>
+			</form>
 			</div>
 		</div>
 		<div class="" id="menu_room">
@@ -145,6 +162,58 @@
 
 
 </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+
+<script>
+      $(document).ready(function() {
+          $("#slider").slider({
+              range: "min",
+              animate: true,
+              value:1,
+              min: 0,
+              max: 255,
+              step: 1,
+              slide: function(event, ui) {
+                update(1,ui.value); //changed
+              }
+          });
+
+          
+
+          //Added, set initial value.
+          $("#amount").val(0);
+ 
+          $("#amount-label").text(0);
+     
+          
+          update();
+
+      });
+      $(document).ready(function() {
+         $("#amount").change(function() {
+			$("#sendData").submit();
+	});
+});
+      //changed. now with parameter
+      function update(slider,val) {
+        //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
+        var $amount = slider == 1?val:$("#amount").val();
+
+        /* commented
+        $amount = $( "#slider" ).slider( "value" );
+        $duration = $( "#slider2" ).slider( "value" );
+         */		
+
+         $( "#amount" ).val($amount);
+         $( "#amount-label" ).text($amount);
+
+        $('#slider a').html('<label><span class="glyphicon glyphicon-chevron-left"></span> '+$amount+' <span class="glyphicon glyphicon-chevron-right"></span></label>');
+      }
+	
+
+    </script>
 </body>
 </html>

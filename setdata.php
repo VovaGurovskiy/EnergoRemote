@@ -63,8 +63,8 @@ if (($login!='') and ($pass!='') and ($typedata!='') and ($data!='') and ($id_gr
 			die('updating error: '. mysql_error());
 		} else 
 			{ 
-				echo $data.'<br>';
 			}
 	}
 }
+echo "<html><head><meta http-equiv='Refresh' content='0; URL=Rud.php'></head></html>";
 ?>
