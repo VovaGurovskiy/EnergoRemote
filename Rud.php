@@ -74,7 +74,7 @@
 		              <div id="slider"></div>
 		            </div>
          		 </div>
-				<form action="setdata.php" method="get" id="sendData">
+				<form id="sendData">
 				<ul class="menuul">
 					<li>On/Off</li>
 					<input type="hidden" name="log" value="test">
@@ -192,11 +192,7 @@
           update();
 
       });
-      $(document).ready(function() {
-         $("#amount").change(function() {
-			$("#sendData").submit();
-	});
-});
+  
       //changed. now with parameter
       function update(slider,val) {
         //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
@@ -205,7 +201,25 @@
         /* commented
         $amount = $( "#slider" ).slider( "value" );
         $duration = $( "#slider2" ).slider( "value" );
-         */		
+         */
+         if($amount>1){
+            //устанавливаем событие отправки для формы с id=form
+            var form_data = $("#sendData").serialize(); //собераем все данные из формы
+            $.ajax({
+                type: "GET", //Метод отправки
+                url: "setdata.php", //путь до php фаила отправителя
+                data: $("#sendData").serialize(),
+                success: function () {
+                    //код в этом блоке выполняется при успешной отправке сообщения
+             
+                }
+                });
+      
+			}
+
+
+
+
 
          $( "#amount" ).val($amount);
          $( "#amount-label" ).text($amount);
