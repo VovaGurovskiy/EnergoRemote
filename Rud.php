@@ -1,3 +1,21 @@
+<?php
+			 session_start(); 
+?>
+
+<?php
+ 	         if (!empty($_SESSION['login']) )
+			{
+		
+	         $login = $_SESSION['login'];
+
+	         $password = $_SESSION['password'];
+	     	}
+		     else
+		     {
+		     	$login = "0";
+		     	$password = "0";
+		     }
+         ?>
 <!DOCTYPE THML>
 <html>
 <head>
@@ -68,20 +86,29 @@
 		</div>
 			<div class="menu" id="r1m1">
 				<div class="price-slider">
-		            <h4 class="great">Amount</h4>
-		            <span>Minimum $10 is required</span>
 		            <div class="col-sm-12">
 		              <div id="slider"></div>
 		            </div>
          		 </div>
-				<form id="sendData">
+				
 				<ul class="menuul">
+					<form id ="OnOffMode">
+						<input type="radio" name="data" value ="1">
+						<input type="radio" name="data" value = "0">
+						<input type="hidden" name="log" value="<?echo $login?>">
+						<input type="hidden" name="pass" value="<?echo $password?>">
+						<input type="hidden" name="id_group" value="1">
+						<input type="hidden" name="typedata" value="onoff">
 					<li>On/Off</li>
-					<input type="hidden" name="log" value="test">
-					<input type="hidden" name="pass" value="test">
-					<input type="hidden" name="id_group" value="1">
+					</form>
+					<form id="sendData">
+						<input type="hidden" name="log" value="<?echo $login?>">
+						<input type="hidden" name="pass" value="<?echo $password?>">
+						<input type="hidden" name="id_group" value="1">
 					<input type="hidden" name="typedata" value="bright_white">
 					<input type="hidden" id ="amount" name="data" value="">
+					</form>
+
 					<li>Slider</li>
 					<li>Auto</li>
 					<li><span class="r">R</span><span  class="g">G</span><span   class="b">B</span></li>
@@ -89,7 +116,6 @@
 					<li>Party</li>
 					<li>Simulations</li>
 				</ul>
-			</form>
 			</div>
 		</div>
 		<div class="" id="menu_room">
@@ -180,9 +206,7 @@
                 update(1,ui.value); //changed
               }
           });
-
           
-
           //Added, set initial value.
           $("#amount").val(0);
  
@@ -190,14 +214,25 @@
      
           
           update();
-
       });
-  
+   $(document).ready(function() {
+   	$("input[name='data']").change(function(){
+   		 $.ajax({
+                type: "GET", //Метод отправки
+                url: "setdata.php", //путь до php фаила отправителя
+                data: $("#OnOffMode").serialize(),
+                success: function () {
+                    //код в этом блоке выполняется при успешной отправке сообщения
+             
+                }
+                });
+
+   	});
+   });
       //changed. now with parameter
       function update(slider,val) {
         //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
         var $amount = slider == 1?val:$("#amount").val();
-
         /* commented
         $amount = $( "#slider" ).slider( "value" );
         $duration = $( "#slider2" ).slider( "value" );
@@ -216,18 +251,11 @@
                 });
       
 			}
-
-
-
-
-
          $( "#amount" ).val($amount);
          $( "#amount-label" ).text($amount);
-
         $('#slider a').html('<label><span class="glyphicon glyphicon-chevron-left"></span> '+$amount+' <span class="glyphicon glyphicon-chevron-right"></span></label>');
       }
 	
-
     </script>
 </body>
 </html>
