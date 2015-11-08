@@ -120,7 +120,7 @@ print <<<HERE
 <form action="login.php" method="post">
 <!-- login.php - это адрес обработчика. То есть, после нажатия на кнопку "Войти", данные из полей отправятся на страничку login.php методом "post"  -->
   <div class="icon-addon addon-md">
-                              <input type="text" placeholder="username" class="form-control f" id="username" name="login">
+                              <input type="text" placeholder="Login" class="form-control f" id="username" name="login">
                               <label for="username" class="glyphicon glyphicon-user" rel="tooltip" title="username"></label>
 HERE;
 
@@ -135,7 +135,7 @@ echo ' value="'.$_COOKIE['login'].'">';
 print <<<HERE
  </div>
                               <div class="icon-addon addon-md">
-                              <input type="password" placeholder="password" class="form-control" id="password" name="password">
+                              <input type="password" placeholder="Password" class="form-control" id="password" name="password">
                               <label for="password" class="glyphicon glyphicon-lock" rel="tooltip" title="password"></label>
 HERE;
 
@@ -155,35 +155,24 @@ print <<<HERE
  <!-- <p>
     <input name="autologin" type="checkbox" value='1'> Автоматический вход.
   </p>--> 
-
+<div>
+    <p>
+HERE;
+    
+echo $error;
+print <<<HERE
+    </p>
+</div>
 <button class="btn btn-md btn-primary btn-block "  name="Submit" value="Login" type="Submit">SIGN IN</button>     
 </div>
 
-<a href="reg.php">Зарегистрироваться</a> 
+<a class="btn btn-md btn-primary btn-block " href="reg.php">SIGN UP</a> 
 
 
 </form>
 
 HERE;
 }
-
-else
-{
-//при удачном входе пользователю выдается все, что расположено ниже между звездочками.
-//************************************************************************************
-
-
-print <<<HERE
-|<a href='page.php?id=$_SESSION[id_name]'>Моя страница</a>|<a href='index.php'>Главная страница</a>|<a href='all_users.php'>Список пользователей</a>|<a href='exit.php'>Выход</a><br><br>
-
-<!-- Между оператором  "print <<<HERE" выводится html код с нужными переменными из php -->
-Вы вошли на сайт, как $_SESSION[login]<br>
-<!-- выше ссылка на выход из аккаунта -->
-HERE;
-
-
-}
-
 ?>
 </div>
                     </div>

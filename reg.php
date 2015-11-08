@@ -91,20 +91,21 @@
 <form action="reguser.php" method="post" enctype="multipart/form-data">
 <!-- save_user.php - это адрес обработчика. То есть, после нажатия на кнопку "Зарегистрироваться", данные из полей отправятся на страничку save_user.php методом "post" -->
   <div class="icon-addon addon-md">
-                              <input type="text" name="name" class="form-control f" id="username">
+                              <input placeholder="Your name" type="text" name="name" class="form-control f" id="username">
                               <label for="username" class="glyphicon glyphicon-text-color" rel="tooltip" title="username"></label>
                             </div>   
                            <div class="icon-addon addon-md ">
-                              <input type="text" name="log" class="form-control ah" id="logname">
+                              <input placeholder="Login" type="text" name="log" class="form-control ah" id="logname">
                               <label for="logname" class="glyphicon glyphicon-user" rel="tooltip" title="logname"></label>
                             </div>
                               <div class="icon-addon addon-md">
-                              <input type="password" name="pass" class="form-control" id="password">
+                              <input placeholder="Password" type="password" name="pass" class="form-control" id="password">
                               <label for="password" class="glyphicon glyphicon-lock" rel="tooltip" title="password"></label>
                             </div>    
   
   
-<button class="btn btn-md btn-primary btn-block "  name="Submit" value="Login" type="Submit">REGISTER</button>     </div>
+<button class="btn btn-md btn-primary btn-block "  name="Submit" value="Login" type="Submit">SIGN UP</button>     </div>
+<a class="btn btn-md btn-primary btn-block "  href="index.php">SIGN IN</a>     </div>
                       </div>
                     </div>
                   </div>
