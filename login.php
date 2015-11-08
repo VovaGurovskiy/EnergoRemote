@@ -7,7 +7,9 @@ if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='
 
 if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
 {
-exit ("Starostaaaaa!"); //останавливаем выполнение сценариев
+$error = ' ';
+$error .= '<br>'.'Заполните все поля';
+exit (); //останавливаем выполнение сценариев
 }
 //если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
 $login = stripslashes($login);
@@ -31,7 +33,9 @@ $result = mysql_query("SELECT * FROM user WHERE login='$login' AND pass='$passwo
 $myrow = mysql_fetch_array($result);
 if (empty($myrow['id_user']))
 {
-    exit ("Извините, введённый вами логин или пароль неверный."); //останавливаем выполнение сценариев
+    $error = ' ';
+    $error .= '<br>'.'Извините, введённый вами логин или пароль неверный.';
+    exit();
 }
 
 else 
