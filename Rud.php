@@ -15,7 +15,18 @@
 		     	$login = "0";
 		     	$password = "0";
 		     }
-         ?>
+		     include("bd.php");
+		     $sql = "SELECT *
+						FROM `Users`  
+					WHERE login=$login ";				
+					
+			$result = mysql_query($sql);
+			$myrow = mysql_fetch_array($result);
+			echo $myrow['name'].'<br>';
+			echo $myrow['login'].'<br>';
+			echo $myrow['password'].'<br>';
+			echo $myrow['regDate'].'<br>';
+		         ?>
 <!DOCTYPE THML>
 <html>
 <head>
@@ -24,19 +35,26 @@
 	<meta name="desctiption" content="Lab_7">
 	<meta name="keywords" content="lab_7">
 	<link rel="stylesheet" type="text/css" href="css/StyleRud.css">
+	<link rel="stylesheet" type="text/css" href="css/styleContextMenu.css">
+
+	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
+	
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script src="js/contextMenu/scriptContextMenu.js"></script>
 	</head>
 <body>
 <div class="container" id="main_cont">
@@ -81,6 +99,14 @@
 	</div>
 	<div class="" id="content">
 		<div class="" id="image_room">
+				<div id="context-menu">
+					<ul class="list-unstyled">
+					<li>First</li>
+					<li>Second</li>
+					<li>Third</li>
+					</ul>
+				</div>
+
 		<div class="accesspoint" id="r1p1">
 			<div class="internal"></div>
 		</div>
@@ -97,16 +123,16 @@
 						<input type="radio" name="data" value = "0">
 						<input type="hidden" name="log" value="<?echo $login?>">
 						<input type="hidden" name="pass" value="<?echo $password?>">
-						<input type="hidden" name="id_group" value="1">
+						<input type="hidden" name="id_group" value="2">
 						<input type="hidden" name="typedata" value="onoff">
 					<li>On/Off</li>
 					</form>
 					<form id="sendData">
 						<input type="hidden" name="log" value="<?echo $login?>">
 						<input type="hidden" name="pass" value="<?echo $password?>">
-						<input type="hidden" name="id_group" value="1">
-					<input type="hidden" name="typedata" value="bright_white">
-					<input type="hidden" id ="amount" name="data" value="">
+						<input type="hidden" name="id_group" value="2">
+						<input type="hidden" name="typedata" value="bright_white">
+						<input type="hidden" id ="amount" name="data" value="">
 					</form>
 
 					<li>Slider</li>
@@ -192,7 +218,7 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-
+/*
 <script>
       $(document).ready(function() {
           $("#slider").slider({
@@ -207,6 +233,20 @@
               }
           });
           
+          $("#slider").slider({
+
+          	stop: function(event, ui) 
+          	{
+	      		$.ajax({
+		                type: "GET", //Метод отправки
+		                url: "setdata.php", //путь до php фаила отправителя
+		                data: $("#sendData").serialize(),
+		                success: function () {
+		                    //код в этом блоке выполняется при успешной отправке сообщения
+		                }
+		            });
+          	}
+          });
           //Added, set initial value.
           $("#amount").val(0);
  
@@ -237,25 +277,12 @@
         $amount = $( "#slider" ).slider( "value" );
         $duration = $( "#slider2" ).slider( "value" );
          */
-         if($amount>1){
-            //устанавливаем событие отправки для формы с id=form
-            var form_data = $("#sendData").serialize(); //собераем все данные из формы
-            $.ajax({
-                type: "GET", //Метод отправки
-                url: "setdata.php", //путь до php фаила отправителя
-                data: $("#sendData").serialize(),
-                success: function () {
-                    //код в этом блоке выполняется при успешной отправке сообщения
-             
-                }
-                });
-      
-			}
+    
          $( "#amount" ).val($amount);
          $( "#amount-label" ).text($amount);
         $('#slider a').html('<label><span class="glyphicon glyphicon-chevron-left"></span> '+$amount+' <span class="glyphicon glyphicon-chevron-right"></span></label>');
       }
 	
-    </script>
+    </script>*/
 </body>
 </html>

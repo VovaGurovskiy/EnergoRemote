@@ -6,7 +6,6 @@ $pass  = trim(htmlspecialchars(stripslashes($_GET['pass'])));
 $id_group  = trim(htmlspecialchars(stripslashes($_GET['id_group'])));
 $typedata  = trim(htmlspecialchars(stripslashes($_GET['typedata'])));
 $data   = trim(htmlspecialchars(stripslashes($_GET['data'])));
-
 if (($login!='') and ($pass!='') and ($typedata!='') and ($data!='') and ($id_group!=''))
 {	
 	include("support.php");
@@ -15,6 +14,7 @@ if (($login!='') and ($pass!='') and ($typedata!='') and ($data!='') and ($id_gr
 	
 	if ($id_user_group !='')
 	{
+		
 		$sql = "";
 		switch($typedata)
 		{ 
